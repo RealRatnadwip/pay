@@ -1,48 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pay Ratnadwip</title>
-    <link rel="icon" href="https://ratnadwip.com/Public/Media/Logo/128x128icon.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pay Ratnadwip Sarkar — Secure UPI Payment</title>
+    <meta name="description"
+        content="Send money securely to Ratnadwip Sarkar via UPI. Scan the QR code or tap to pay instantly with any UPI app.">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" href="https://ratnadwip.com/Media/Logo/128x128icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pay Ratnadwip Sarkar">
+    <meta property="og:description" content="Send money securely via UPI. Scan QR or tap to pay.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pay.ratnadwip.com">
 </head>
+
 <body>
 
-    <header>
-        <a href="https://ratnadwip.com/Temp/DiscordRP"><div class="header-name">real<span>ratnadwip</span></div></a>
-        <nav class="header-links">
-            <a href="https://realratnadwip.github.io" target="_blank">Website</a>
-            <div class="divider"></div>
-            <a href="https://realratnadwip.github.io/Public/contactForms/" target="_blank">Contact Me</a>
-        </nav>
-    </header>
+    <!-- Ambient background blurs -->
+    <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb--3" aria-hidden="true"></div>
 
-    <main>
-        <div class="card">
-            <span class="card-tag">UPI</span>
+    <!-- Subtle grid pattern -->
+    <div class="bg-grid" aria-hidden="true"></div>
 
-            <span class="card-label">
-                Scan &amp; Pay to
-                <span class="name-accent">Ratnadwip Sarkar</span>
-            </span>
+    <div class="page-wrapper">
 
-            <div class="qr-wrap">
-                <img src="./QR.png" alt="UPI QR Code">
-            </div>
-
-            <div class="card-meta">
-                <p>realratnadwip@fam</p>
-            </div>
-
-            <a class="pay-btn" href="upi://pay?pa=realratnadwip@fam&pn=Ratnadwip%20Sarkar">
-                <i class="fas fa-bolt"></i>
-                Send Money
+        <!-- Header -->
+        <header id="site-header">
+            <a href="https://ratnadwip.com" class="logo" id="logo-link">
+                <span class="logo__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="logo__text">real<span class="logo__highlight">ratnadwip</span></span>
             </a>
-        </div>
-    </main>
+            <nav class="nav" id="site-nav">
+                <a href="https://ratnadwip.com" target="_blank" rel="noopener" class="nav__link" id="nav-website">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path
+                            d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                    Website
+                </a>
+                <a href="https://ratnadwip.com/contactForms/" target="_blank" rel="noopener" class="nav__link"
+                    id="nav-contact">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    Contact
+                </a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main id="payment-section">
+            <div class="payment-card" id="payment-card">
+
+                <!-- Trust badge -->
+                <div class="trust-badge" id="trust-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" opacity="0.2" />
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" />
+                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Verified & Secure
+                </div>
+
+                <!-- Payee info -->
+                <div class="payee" id="payee-info">
+                    <div class="payee__avatar" id="payee-avatar">RS</div>
+                    <div class="payee__details">
+                        <h1 class="payee__name">
+                            Ratnadwip Sarkar
+                            <svg class="payee__verified" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="#E0F11F" />
+                                <path d="M9 12l2 2 4-4" stroke="#121212" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </h1>
+                        <p class="payee__upi" id="upi-id">realratnadwip@fam</p>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="divider-line"></div>
+
+                <!-- QR Section -->
+                <div class="qr-section" id="qr-section">
+                    <p class="qr-section__label">Scan with any UPI app</p>
+                    <div class="qr-frame" id="qr-frame">
+                        <!-- Corner decorations -->
+                        <span class="qr-corner qr-corner--tl"></span>
+                        <span class="qr-corner qr-corner--tr"></span>
+                        <span class="qr-corner qr-corner--bl"></span>
+                        <span class="qr-corner qr-corner--br"></span>
+                        <img src="./QR.png" alt="UPI QR Code for realratnadwip@fam" id="qr-image" width="200"
+                            height="200">
+                    </div>
+
+                </div>
+
+                <!-- Divider -->
+                <div class="divider-line"></div>
+
+                <!-- Pay Button -->
+                <a class="pay-btn" id="pay-button" href="upi://pay?pa=realratnadwip%40fam&pn=Ratnadwip%20Sarkar&cu=INR"
+                    role="button">
+                    <span class="pay-btn__icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <rect x="1" y="4" width="22" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                            <path d="M1 10h22" stroke="currentColor" stroke-width="2" />
+                            <path d="M6 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <span class="pay-btn__text">Pay Now</span>
+                    <span class="pay-btn__arrow">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </span>
+                </a>
+
+                <!-- Copy UPI link -->
+                <button class="copy-btn" id="copy-upi-btn" type="button" aria-label="Copy UPI ID">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <span id="copy-text">Copy UPI ID</span>
+                </button>
+
+                <!-- Security footer -->
+                <div class="security-footer" id="security-footer">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <span>End-to-end encrypted · UPI secured by NPCI</span>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // Copy UPI ID to clipboard
+        const copyBtn = document.getElementById('copy-upi-btn');
+        const copyText = document.getElementById('copy-text');
+        const upiId = 'realratnadwip@fam';
+
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(upiId);
+                copyText.textContent = 'Copied!';
+                copyBtn.classList.add('copy-btn--success');
+                setTimeout(() => {
+                    copyText.textContent = 'Copy UPI ID';
+                    copyBtn.classList.remove('copy-btn--success');
+                }, 2000);
+            } catch {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = upiId;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                copyText.textContent = 'Copied!';
+                copyBtn.classList.add('copy-btn--success');
+                setTimeout(() => {
+                    copyText.textContent = 'Copy UPI ID';
+                    copyBtn.classList.remove('copy-btn--success');
+                }, 2000);
+            }
+        });
+
+        // UPI Intent handler with fallback
+        const payBtn = document.getElementById('pay-button');
+        payBtn.addEventListener('click', (e) => {
+            // On desktop, prevent default (UPI deep links only work on mobile)
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (!isMobile) {
+                e.preventDefault();
+                // Highlight QR section
+                const qrSection = document.getElementById('qr-section');
+                qrSection.classList.add('qr-section--highlight');
+                setTimeout(() => qrSection.classList.remove('qr-section--highlight'), 2000);
+            }
+        });
+
+        // Subtle entrance animations with IntersectionObserver
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.payment-card > *').forEach(el => {
+            el.classList.add('fade-target');
+            observer.observe(el);
+        });
+    </script>
 
 </body>
+
 </html>

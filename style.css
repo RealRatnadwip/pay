@@ -1,248 +1,708 @@
+/* ═══════════════════════════════════════════════════════
+   PAY RATNADWIP — Modern Fintech Payment Page
+   Premium glassmorphic dark design with trust signals
+   ═══════════════════════════════════════════════════════ */
+
+/* ── DESIGN TOKENS ─────────────────────────────────────── */
 :root {
-            --accent-main: #E0F11F;
-            --accent-secondary: #d2db68;
-            --text: #f1f2f3;
-            --bg-main: #121212;
-            --bg-secondary: #1e2124;
-        }
+    --color-bg: #121212;
+    --color-bg-card: rgba(15, 20, 40, 0.65);
+    --color-bg-card-border: rgba(255, 255, 255, 0.06);
+    --color-bg-elevated: rgba(255, 255, 255, 0.04);
 
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    --color-text-primary: #f0f2f8;
+    --color-text-secondary: rgba(240, 242, 248, 0.55);
+    --color-text-muted: rgba(240, 242, 248, 0.3);
 
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
+    --color-accent: #E0F11F;
+    --color-accent-light: #e8f54d;
+    --color-accent-glow: rgba(224, 241, 31, 0.2);
+    --color-accent-dark: #b8c71a;
 
-        body {
-            background-color: var(--bg-main);
-            font-family: 'DM Sans', sans-serif;
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-        }
-        a {
-            text-decoration: none;
-        }
+    --color-success: #22c55e;
+    --color-success-soft: rgba(34, 197, 94, 0.12);
 
-        /* ── HEADER ─────────────────────────────────── */
-        header {
-            padding: 1em 2em;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-            border-bottom: 0.16em solid var(--text);
-            animation: slideDown 0.4s cubic-bezier(.22,1,.36,1) both;
-            gap: 1em;
-        }
 
-        .header-name {
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-weight: 900;
-            font-size: clamp(1.7em, 4vw, 2.7em);
-            letter-spacing: -0.02em;
-            color: var(--text);
-            line-height: 1;
-            white-space: nowrap;
-        }
 
-        .header-name span {
-            color: var(--accent-main);
-        }
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-        /* pill-box link group */
-        .header-links {
-            display: flex;
-            align-items: stretch;
-            flex-shrink: 0;
-            border: 0.16em solid var(--text);
-        }
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
 
-        .header-links a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: clamp(0.62em, 1.8vw, 0.75em);
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.45em 0.9em;
-            transition: background 0.1s, color 0.1s;
-            display: flex;
-            align-items: center;
-        }
+    --shadow-card: 0 4px 40px rgba(0, 0, 0, 0.35),
+                   0 0 80px rgba(99, 102, 241, 0.06);
+    --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.15);
 
-        .header-links a:hover {
-            background: var(--accent-main);
-            color: var(--bg-main);
-        }
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-        .header-links .divider {
-            width: 0.16em;
-            background: var(--text);
-            flex-shrink: 0;
-        }
+/* ── RESET ─────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Mobile: stack name above links */
-        @media (max-width: 30em) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 0.85em 1em;
-                gap: 0.5em;
-            }
-        }
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
 
-        /* ── MAIN ───────────────────────────────────── */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5em 1em;
-            min-height: 0;
-        }
+html, body {
+    height: 100%;
+}
 
-        /* ── CARD ───────────────────────────────────── */
-        .card {
-            background: var(--bg-secondary);
-            border-radius: 0;
-            padding: clamp(1.4em, 4vw, 2em);
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 1.2em;
-            width: min(22em, 92vw);
-            border: 0.18em solid var(--text);
-            box-shadow: 0.35em 0.35em 0 var(--accent-main);
-            animation: popIn 0.4s cubic-bezier(.22,1,.36,1) 0.1s both;
-            position: relative;
-            transition: box-shadow 0.12s, transform 0.12s;
-        }
+body {
+    background-color: var(--color-bg);
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
 
-        .card:hover {
-            box-shadow: 0.5em 0.5em 0 var(--accent-main);
-            transform: translate(-0.12em, -0.12em);
-        }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-        /* ⚡ UPI tag floating top-right */
-        .card-tag {
-            position: absolute;
-            top: -0.18em;
-            right: -0.18em;
-            transform: translate(0%, -100%);
-            background: var(--accent-main);
-            color: var(--bg-main);
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-weight: 900;
-            font-size: 0.68em;
-            letter-spacing: 0.1em;
-            padding: 0.28em 0.65em;
-            border: 0.2em solid var(--text);
-            white-space: nowrap;
-            pointer-events: none;
-            text-transform: uppercase;
-        }
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+}
 
-        /* ── CARD LABEL ─────────────────────────────── */
-        .card-label {
-            font-size: 0.68em;
-            font-weight: 700;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: rgba(241,242,243,0.4);
-            text-align: center;
-            line-height: 1.7;
-            border-bottom: 0.18em solid rgba(255,255,255,0.1);
-            padding-bottom: 1em;
-        }
+img {
+    max-width: 100%;
+    display: block;
+}
 
-        .card-label .name-accent {
-            display: block;
-            font-size: 1.55em;
-            letter-spacing: 0.01em;
-            color: var(--accent-main);
-            font-weight: 900;
-            text-transform: none;
-            font-family: 'Big Shoulders Display', sans-serif;
-            line-height: 1.1;
-        }
+/* ── AMBIENT BACKGROUND ────────────────────────────────── */
+.bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+}
 
-        /* ── QR IMAGE ───────────────────────────────── */
-        .qr-wrap {
-            align-self: center;
-            display: inline-flex;
-            border: 0.18em solid var(--text);
-            box-shadow: 0.22em 0.22em 0 var(--accent-main);
-            pointer-events: none;
-        }
+.bg-orb--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(224, 241, 31, 0.1), transparent 70%);
+    top: -10%;
+    left: -10%;
+    animation: orbFloat1 20s ease-in-out infinite;
+}
 
-        .qr-wrap img {
-            display: block;
-            width: clamp(10em, 48vw, 13em);
-            height: auto;
-            object-fit: cover;
-            background: var(--bg-secondary);
-            pointer-events: none;
-        }
+.bg-orb--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(184, 199, 26, 0.08), transparent 70%);
+    bottom: -5%;
+    right: -10%;
+    animation: orbFloat2 25s ease-in-out infinite;
+}
 
-        /* ── CARD META ──────────────────────────────── */
-        .card-meta p {
-            font-size: 0.68em;
-            color: rgba(241,242,243,0.3);
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-align: center;
-        }
+.bg-orb--3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(224, 241, 31, 0.06), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbFloat3 18s ease-in-out infinite;
+}
 
-        /* ── BUTTON ─────────────────────────────────── */
-        .pay-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.55em;
-            background: var(--accent-main);
-            color: var(--bg-main);
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-weight: 900;
-            font-size: 1.15em;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 0.65em 1.5em;
-            border-radius: 0;
-            border: 0.18em solid var(--text);
-            cursor: pointer;
-            text-decoration: none;
-            transition: box-shadow 0.1s, transform 0.1s;
-            box-shadow: 0.25em 0.25em 0 var(--text);
-        }
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+}
 
-        .pay-btn:hover {
-            box-shadow: 0.42em 0.42em 0 var(--text);
-            transform: translate(-0.13em, -0.13em);
-        }
+/* ── PAGE WRAPPER ──────────────────────────────────────── */
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
-        .pay-btn:active {
-            box-shadow: 0.05em 0.05em 0 var(--text);
-            transform: translate(0.1em, 0.1em);
-        }
+/* ── HEADER ────────────────────────────────────────────── */
+header {
+    padding: 1.1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 14, 26, 0.6);
+    animation: headerReveal 0.6s var(--transition-smooth) both;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        .pay-btn i {
-            font-size: 0.85em;
-        }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    transition: opacity var(--transition-fast);
+}
 
-        /* ── ANIMATIONS ─────────────────────────────── */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-1em); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+.logo:hover {
+    opacity: 0.8;
+}
 
-        @keyframes popIn {
-            from { opacity: 0; transform: translate(0.6em, 0.6em); }
-            to   { opacity: 1; transform: translate(0, 0); }
-        }
+.logo__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-glow);
+    color: var(--color-accent-light);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.logo__text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-secondary);
+}
+
+.logo__highlight {
+    color: var(--color-accent);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.nav__link:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-elevated);
+}
+
+.nav__link svg {
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+}
+
+.nav__link:hover svg {
+    opacity: 1;
+}
+
+/* ── MAIN ──────────────────────────────────────────────── */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.25rem;
+}
+
+/* ── PAYMENT CARD ──────────────────────────────────────── */
+.payment-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-bg-card);
+    backdrop-filter: blur(40px) saturate(1.3);
+    -webkit-backdrop-filter: blur(40px) saturate(1.3);
+    border: 1px solid var(--color-bg-card-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Subtle border glow on hover */
+.payment-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg,
+        rgba(224, 241, 31, 0.1),
+        transparent 40%,
+        transparent 60%,
+        rgba(224, 241, 31, 0.06));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.payment-card:hover::before {
+    opacity: 1;
+}
+
+/* ── TRUST BADGE ───────────────────────────────────────── */
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    background: var(--color-success-soft);
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-success);
+    letter-spacing: 0.03em;
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+.trust-badge svg {
+    flex-shrink: 0;
+}
+
+/* ── PAYEE ─────────────────────────────────────────────── */
+.payee {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.payee__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #121212;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px var(--color-accent-glow);
+}
+
+.payee__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.payee__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    line-height: 1.3;
+}
+
+.payee__verified {
+    flex-shrink: 0;
+}
+
+.payee__upi {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0;
+}
+
+/* ── DIVIDER ───────────────────────────────────────────── */
+.divider-line {
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.06) 20%,
+        rgba(255, 255, 255, 0.06) 80%,
+        transparent);
+}
+
+/* ── QR SECTION ────────────────────────────────────────── */
+.qr-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all var(--transition-smooth);
+}
+
+.qr-section--highlight {
+    animation: highlightPulse 0.6s ease-in-out 3;
+}
+
+.qr-section__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+}
+
+.qr-frame {
+    position: relative;
+    padding: 16px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-spring), box-shadow var(--transition-smooth);
+}
+
+.qr-frame:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 12px 40px rgba(0, 0, 0, 0.25),
+                var(--shadow-glow);
+}
+
+.qr-frame img {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    image-rendering: crisp-edges;
+}
+
+/* Animated corner decorations */
+.qr-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    border-width: 0;
+}
+
+.qr-corner--tl {
+    top: 6px; left: 6px;
+    border-top-width: 3px;
+    border-left-width: 3px;
+    border-top-left-radius: 6px;
+}
+
+.qr-corner--tr {
+    top: 6px; right: 6px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-top-right-radius: 6px;
+}
+
+.qr-corner--bl {
+    bottom: 6px; left: 6px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-bottom-left-radius: 6px;
+}
+
+.qr-corner--br {
+    bottom: 6px; right: 6px;
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+    border-bottom-right-radius: 6px;
+}
+
+/* ── PAY BUTTON ────────────────────────────────────────── */
+.pay-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.9rem 1.5rem;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #121212;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--color-accent-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pay-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1),
+        transparent 50%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.pay-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(224, 241, 31, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.pay-btn:hover::before {
+    opacity: 1;
+}
+
+.pay-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px var(--color-accent-glow);
+}
+
+.pay-btn__icon {
+    display: flex;
+    align-items: center;
+}
+
+.pay-btn__text {
+    font-weight: 700;
+}
+
+.pay-btn__arrow {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-fast);
+}
+
+.pay-btn:hover .pay-btn__arrow {
+    transform: translateX(4px);
+}
+
+/* ── COPY BUTTON ───────────────────────────────────────── */
+.copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem;
+    background: var(--color-bg-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-primary);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.copy-btn--success {
+    background: var(--color-success-soft) !important;
+    color: var(--color-success) !important;
+    border-color: rgba(34, 197, 94, 0.2) !important;
+}
+
+/* ── SECURITY FOOTER ───────────────────────────────────── */
+.security-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 0.3rem;
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+}
+
+.security-footer svg {
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ── FADE-IN TARGETS ───────────────────────────────────── */
+.fade-target {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-target.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── ANIMATIONS ────────────────────────────────────────── */
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes highlightPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+    50% {
+        box-shadow: 0 0 0 6px var(--color-accent-glow);
+        border-radius: var(--radius-md);
+    }
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(40px, 30px); }
+    66% { transform: translate(-20px, 50px); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(-30px, -40px); }
+    66% { transform: translate(20px, -20px); }
+}
+
+@keyframes orbFloat3 {
+    0%, 100% { transform: translate(-50%, -50%); }
+    33% { transform: translate(-45%, -55%); }
+    66% { transform: translate(-55%, -45%); }
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 480px) {
+    header {
+        padding: 0.9rem 1.1rem;
+    }
+
+    .nav__link {
+        font-size: 0.73rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    main {
+        padding: 1.5rem 0.9rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .payment-card {
+        padding: 1.6rem;
+        border-radius: var(--radius-lg);
+        gap: 1.15rem;
+    }
+
+    .payee__name {
+        font-size: 1.05rem;
+    }
+
+    .payee__avatar {
+        width: 44px;
+        height: 44px;
+        font-size: 0.9rem;
+    }
+
+    .qr-frame img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .qr-frame {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 350px) {
+    .logo__text {
+        font-size: 1rem;
+    }
+
+    .nav__link span {
+        display: none;
+    }
+
+    .payment-card {
+        padding: 1.3rem;
+    }
+
+    .qr-frame img {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* ── PREFERS REDUCED MOTION ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .bg-orb {
+        animation: none;
+    }
+}
+
+/* ── HIGH CONTRAST MODE ────────────────────────────────── */
+@media (prefers-contrast: high) {
+    .payment-card {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .divider-line {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .pay-btn {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+}
