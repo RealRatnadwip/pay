@@ -15,6 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 
     <!-- Open Graph -->
     <meta property="og:title" content="Pay Ratnadwip Sarkar">
@@ -93,7 +94,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </h1>
-                        <p class="payee__upi" id="upi-id">realratnadwip@fam</p>
+                        <p class="payee__upi" id="upi-id">realratnadwip@slc</p>
                     </div>
                 </div>
 
@@ -109,8 +110,7 @@
                         <span class="qr-corner qr-corner--tr"></span>
                         <span class="qr-corner qr-corner--bl"></span>
                         <span class="qr-corner qr-corner--br"></span>
-                        <img src="./QR.png" alt="UPI QR Code for realratnadwip@fam" id="qr-image" width="200"
-                            height="200">
+                        <div id="qr-canvas"></div>
                     </div>
 
                 </div>
@@ -119,7 +119,7 @@
                 <div class="divider-line"></div>
 
                 <!-- Pay Button -->
-                <a class="pay-btn" id="pay-button" href="upi://pay?pa=realratnadwip%40fam&pn=Ratnadwip%20Sarkar&cu=INR"
+                <a class="pay-btn" id="pay-button" href="upi://pay?pa=realratnadwip%40slc&pn=Ratnadwip%20Sarkar&cu=INR"
                     role="button">
                     <span class="pay-btn__icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -161,14 +161,42 @@
     </div>
 
     <script>
-        // Copy UPI ID to clipboard
+        // ── CONFIG ──────────────────────────────────────
+        const UPI_ID   = 'realratnadwip@slc';
+        const UPI_NAME = 'Ratnadwip Sarkar';
+        const UPI_URL  = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(UPI_NAME)}&cu=INR`;
+
+        // ── DYNAMIC QR CODE ─────────────────────────────
+        (function generateQR() {
+            const qr = qrcode(0, 'M');
+            qr.addData(UPI_URL);
+            qr.make();
+
+            const canvas = document.getElementById('qr-canvas');
+            const cellSize = 5;
+            const margin = 0;
+            canvas.innerHTML = qr.createSvgTag({ cellSize, margin, scalable: true });
+
+            // Style the generated SVG
+            const svg = canvas.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('width', '200');
+                svg.setAttribute('height', '200');
+                svg.style.display = 'block';
+                svg.style.borderRadius = '4px';
+            }
+        })();
+
+        // ── UPDATE PAY BUTTON HREF ──────────────────────
+        document.getElementById('pay-button').href = UPI_URL;
+
+        // ── COPY UPI ID ─────────────────────────────────
         const copyBtn = document.getElementById('copy-upi-btn');
         const copyText = document.getElementById('copy-text');
-        const upiId = 'realratnadwip@fam';
 
         copyBtn.addEventListener('click', async () => {
             try {
-                await navigator.clipboard.writeText(upiId);
+                await navigator.clipboard.writeText(UPI_ID);
                 copyText.textContent = 'Copied!';
                 copyBtn.classList.add('copy-btn--success');
                 setTimeout(() => {
@@ -176,9 +204,8 @@
                     copyBtn.classList.remove('copy-btn--success');
                 }, 2000);
             } catch {
-                // Fallback for older browsers
                 const ta = document.createElement('textarea');
-                ta.value = upiId;
+                ta.value = UPI_ID;
                 ta.style.position = 'fixed';
                 ta.style.left = '-9999px';
                 document.body.appendChild(ta);
@@ -194,22 +221,19 @@
             }
         });
 
-        // UPI Intent handler with fallback
+        // ── DESKTOP FALLBACK ────────────────────────────
         const payBtn = document.getElementById('pay-button');
         payBtn.addEventListener('click', (e) => {
-            // On desktop, prevent default (UPI deep links only work on mobile)
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             if (!isMobile) {
                 e.preventDefault();
-                // Highlight QR section
                 const qrSection = document.getElementById('qr-section');
                 qrSection.classList.add('qr-section--highlight');
                 setTimeout(() => qrSection.classList.remove('qr-section--highlight'), 2000);
             }
         });
 
-        // Subtle entrance animations with IntersectionObserver
-        const observerOptions = { threshold: 0.1 };
+        // ── ENTRANCE ANIMATIONS ─────────────────────────
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -217,7 +241,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.payment-card > *').forEach(el => {
             el.classList.add('fade-target');
