@@ -164,7 +164,8 @@
         // ── CONFIG ──────────────────────────────────────
         const UPI_ID   = 'realratnadwip@slc';
         const UPI_NAME = 'Ratnadwip Sarkar';
-        const UPI_URL  = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(UPI_NAME)}&cu=INR`;
+        const TRANSACTION_NOTE = 'Sent using PIGEON'; // Optional: Set a default transaction note (e.g., 'D65R7UG8BY78ONY7B8IY')
+        const UPI_URL  = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&tn=${encodeURIComponent(TRANSACTION_NOTE)}&cu=INR`;
 
         // ── DYNAMIC QR CODE ─────────────────────────────
         (function generateQR() {
